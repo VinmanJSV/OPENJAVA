@@ -1,37 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.JavaPi" name="Java Pi" version="1.0.0"
-provider-name="Vinman_sv">
-    <requires>
-		<import addon="xbmc.python" version="2.14.0"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>executable</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<platform>all</platform>
-		<summary lang="en">INSTALL JAVA FOR OPENELEC 5.0.3 ON RASPBERRY PI TO RUN HNL HOCKEY ON PHEONIX</summary>
-		<description lang="en">SPECIAL THANKS TO ROCKCRUSHER AND WOODY</description>
-		<license>GNU General Public License, v2</license>
-		<language></language>
-		<email>vinman_sv@hotmail.com</email>
-	</extension>
-</addon>
-
-<addon id="plugin.program.PrometheusJava" name="PrometheusJava" version="1.0.0" provider-name="Vinman_sv">
-    <requires>
-		<import addon="xbmc.python" version="2.14.0"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>executable</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<platform>all</platform>
-		<summary lang="en">INSTALL JAVA FOR OPENELEC KODI on PROMETHEUS TO RUN HNL HOCKEY ON PHEONIX</summary>
-		<description lang="en">SPECIAL THANKS TO ROCKCRUSHER AND WOODY</description>
-		<license>GNU General Public License, v2</license>
-		<language></language>
-		<email>vinman_sv@hotmail.com</email>
-	</extension>
+<addon id="repository.VinManJSV" name="VinmanJSV REPO" version="1.0" provider-name="Vinman_sv">
+    <extension point="xbmc.addon.repository" name="VinmanJSV REPO">
+        <info compressed="false">http://raw.github.com/VinmanJSV/OPENJAVA/master/addons.xml</info>
+        <checksum>http://raw.github.com/VinmanJSV/OPENJAVA/master/addons.xml.md5</checksum>
+        <datadir zip="true">http://raw.github.com/VinmanJSV/OPENJAVA/master/zips</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary></summary>
+        <description></description>
+        <platform>all</platform>
+    </extension>
 </addon>
 </addons>
