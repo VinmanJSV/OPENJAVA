@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<requires <import addon="xbmc.python" version="2.14.0"/>
+</requires>
 <addons>
 <addon id="plugin.program.JavaPi" name="Java Pi" version="1.0.0"
 provider-name="Vinman_sv">
