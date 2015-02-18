@@ -1,1 +1,0 @@
-Version 1 java install on pi for OPENELEC 5.0.3
