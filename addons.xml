@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
+<addon id="plugin.program.prometheusjava" name="PrometheusJava" version="1.0.0" provider-name="Vinman_sv">
+    <requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="addon.py">
+		<provides>executable</provides>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">INSTALL JAVA FOR OPENELEC KODI on PROMETHEUS TO RUN HNL HOCKEY ON PHEONIX</summary>
+		<description lang="en">SPECIAL THANKS TO ROCKCRUSHER AND WOODY</description>
+		<license>GNU General Public License, v2</license>
+		<language></language>
+		<email>vinman_sv@hotmail.com</email>
+	</extension>
+</addon>
+
 <addon id="plugin.program.JavaPi" name="Java Pi" version="1.0.0"
 provider-name="Vinman_sv">
     <requires>
@@ -29,23 +46,6 @@ provider-name="Vinman_sv">
 	<extension point="xbmc.addon.metadata">
 		<platform>all</platform>
 		<summary lang="en">INSTALL JAVA FOR OPENELEC ON RASPBERRY PI2 TO RUN HNL HOCKEY ON PHEONIX</summary>
-		<description lang="en">SPECIAL THANKS TO ROCKCRUSHER AND WOODY</description>
-		<license>GNU General Public License, v2</license>
-		<language></language>
-		<email>vinman_sv@hotmail.com</email>
-	</extension>
-</addon>
-
-<addon id="plugin.program.prometheusjava" name="PrometheusJava" version="1.0.0" provider-name="Vinman_sv">
-    <requires>
-		<import addon="xbmc.python" version="2.1.0"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>executable</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<platform>all</platform>
-		<summary lang="en">INSTALL JAVA FOR OPENELEC KODI on PROMETHEUS TO RUN HNL HOCKEY ON PHEONIX</summary>
 		<description lang="en">SPECIAL THANKS TO ROCKCRUSHER AND WOODY</description>
 		<license>GNU General Public License, v2</license>
 		<language></language>
