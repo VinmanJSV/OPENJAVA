@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.prometheusjava" name="PrometheusJava" version="1.0.0" provider-name="Vinman_sv">
+<addon id="plugin.program.java64" name="Java64" version="1.0.0" provider-name="Vinman_sv">
     <requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 	</requires>
@@ -8,7 +8,7 @@
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<platform>all</platform>
-		<summary lang="en">INSTALL JAVA FOR OPENELEC KODI on PROMETHEUS TO RUN HNL HOCKEY ON PHEONIX</summary>
+		<summary lang="en">INSTALL JAVA FOR OPENELEC KODI on MOST 64x  TO RUN HNL HOCKEY ON PHEONIX</summary>
 		<description lang="en">SPECIAL THANKS TO ROCKCRUSHER AND WOODY</description>
 		<license>GNU General Public License, v2</license>
 		<language></language>
