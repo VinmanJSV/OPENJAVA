@@ -1,7 +1,7 @@
 import sys
 import subprocess
-subprocess.call("chmod +x /storage/.kodi/addons/plugin.program.JavaPi/autophs.sh", shell=True)
-subprocess.call("/storage/.kodi/addons/plugin.program.JavaPi/autophs.sh", shell=True)
+subprocess.call("chmod +x /storage/.kodi/addons/plugin.program.JavaPi2/autophs.sh", shell=True)
+subprocess.call("/storage/.kodi/addons/plugin.program.JavaPi2/autophs.sh", shell=True)
 
 import xbmcaddon
 import xbmcgui
