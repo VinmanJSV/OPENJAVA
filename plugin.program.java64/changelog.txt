@@ -1,3 +1,4 @@
 Version 1 java install on 64 systems for OPENELEC KODI
 
 Version 1.0.1 fix missing file
+Version 1.0.2 fix corrupt autostart.sh setup file
