@@ -35,7 +35,8 @@ provider-name="Vinman_sv">
 	</extension>
 </addon>
 
-<addon id="plugin.program.java64" name="Java64" version="1.0.1" provider-name="Vinman_sv">
+<addon id="plugin.program.JavaPi2" name="Java Pi2" version="1.0.1"
+provider-name="Vinman_sv">
     <requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 	</requires>
@@ -44,7 +45,7 @@ provider-name="Vinman_sv">
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<platform>all</platform>
-		<summary lang="en">INSTALL JAVA FOR OPENELEC KODI on MOST 64x  TO RUN HNL HOCKEY ON PHEONIX</summary>
+		<summary lang="en">INSTALL JAVA FOR OPENELEC ON RASPBERRY PI2 TO RUN HNL HOCKEY ON PHEONIX</summary>
 		<description lang="en">SPECIAL THANKS TO ROCKCRUSHER AND WOODY</description>
 		<license>GNU General Public License, v2</license>
 		<language></language>
