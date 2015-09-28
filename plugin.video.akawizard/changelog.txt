@@ -1,0 +1,20 @@
+V2.0.2
+Added video/msg setting
+cleaned up
+
+V2.0.1
+Fixed windows- installs 7,8 & 10
+Fixed Android reboot..Might need SuperSU installed
+
+v2.0.0
+Added auto shutdown for windows
+Auto reboot for all other systems
+
+v1.0.2
+Updated new Host Server and Skin
+
+v1.1
+updated with new host server
+
+v1.0.0
+original release
