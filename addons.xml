@@ -73,7 +73,7 @@ provider-name="VinMan JSV">
 	</extension>
 </addon>
 
-<addon id="plugin.video.akawizard" name="..AKA Wizard" version="2.0.3" provider-name="AKA BUILDS">
+<addon id="plugin.video.akawizard" name="AKA Wizard" version="2.0.4" provider-name="AKA BUILDS">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
