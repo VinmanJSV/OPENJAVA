@@ -13,32 +13,31 @@ base='http://167.114.14.194/Kodi/Wizard/tools/'
 ADDON=xbmcaddon.Addon(id='plugin.video.akawizard')
 INTRO = xbmc.translatePath(os.path.join('special://home/addons/plugin.video.akawizard/Animal.mp4'))  
   
-VERSION = "2.0.2"
+VERSION = "2.0.5"
 PATH = "AKA Wizard"
 
 
-def INTROS():            
+def INTROS():
+    xbmcaddon.Addon(id='plugin.video.akawizard').openSettings()
+    
     if ADDON.getSetting('intro') == "true":
         xbmcPlayer=xbmc.Player()
         xbmcPlayer.play(INTRO)
-        xbmc.sleep(250)
         ADDON.setSetting('intro','false')
     else:
         pass
         if ADDON.getSetting('message') == "true":
-            #xbmc.sleep(250)
             intro=xbmcgui.Dialog()
             msg = intro.ok("AKAWIZARD", "[COLOR orange]AUTOMATICALLY INSTALLS THE BUILDS!",
                             "MOST DEVICES REBOOT TO YOUR NEW BUILD",
-                            "ENJOY ALL AKA WIZARD BUILDS. THANK-YOU. [/COLOR]"
-                            )
-            if msg == True:
+                            "ENJOY ALL AKA WIZARD BUILDS. THANK-YOU. [/COLOR]")
+            if msg == "ok":
                 ADDON.setSetting('message','false')
             else:
                 pass
         else:
             pass      
-INTROS()    
+    
 
 
 def CATEGORIES():                      
@@ -115,29 +114,41 @@ def wizard(name,url,description):
                 pass    
         else:
             pass
-                                
-                        
-    elif os.name != "nt":
-        dp.update(0,"[COLOR red]Downloading.... [COLOR green]DONE![/COLOR]","[COLOR yellow]Extracting Zip.... [COLOR green]PLease Wait[/COLOR]","[COLOR green]KODI WILL REBOOT AUTOMATICALLY.....Please Wait![/COLOR]")
-        extract.all(lib,addonfolder,dp)
-        ADDON.setSetting('intro','true')
     else:
-        pass
+        pass                     
+    if os.name != "nt":
+        if ADDON.getSetting('UNIT') == "1":                    
+            print "OE"
+            dp.update(0,"[COLOR red]Downloading.... [COLOR green]DONE![/COLOR]","[COLOR yellow]Extracting Zip.... [COLOR green]PLease Wait[/COLOR]","[COLOR green]KODI WILL REBOOT AUTOMATICALLY.....Please Wait![/COLOR]")
+            extract.all(lib,addonfolder,dp)
+            ADDON.setSetting('intro','true')
+            print "NOT WINDOWS"
+            subprocess.call('pkill -9 kodi && systemctl start kodi',shell=True)
                 
+        elif ADDON.getSetting('UNIT') == "2":
+            dp.update(0,"[COLOR red]Downloading.... [COLOR green]DONE![/COLOR]","[COLOR yellow]Extracting Zip.... [COLOR green]PLease Wait[/COLOR]","[COLOR green]KODI WILL REBOOT AUTOMATICALLY.....Please Wait![/COLOR]")
+            extract.all(lib,addonfolder,dp)
+            ADDON.setSetting('intro','true')
+            print "NOT WINDOWS"
+            os.system("su -c 'reboot'")
+
+        elif ADDON.getSetting('UNIT') == "3":
+            dp.update(0,"[COLOR red]Downloading.... [COLOR green]DONE![/COLOR]","[COLOR yellow]Extracting Zip.... [COLOR green]PLease Wait[/COLOR]","[COLOR green]KODI WILL REBOOT AUTOMATICALLY.....Please Wait![/COLOR]")
+            extract.all(lib,addonfolder,dp)
+            ADDON.setSetting('intro','true')
+            print "NOT WINDOWS"
+            subprocess.call('pkill -9 kodi && kodi',shell=True)
+            
+        else:
+            dialog = xbmcgui.Dialog()
+            dialog.ok("AKAWIZARD", "Now Please Press Ok Then UNPLUG UNIT", "[COLOR red]ENJOY ALL AKA WIZARD BUILDS. THANK-YOU. [/COLOR]")
+            pass
                 
-    if win == "0":
-        print "NOT WINDOWS"
-        os.system("su -c 'reboot'")
-    elif win == "0":
-        os.system("reboot")
-    elif win == "0":
-        xbmc.executebuiltin('Reboot')
     else:
-        pass
-    print "GOOD GUESS"
-    dialog = xbmcgui.Dialog()
-    dialog.ok("AKAWIZARD", "Now Please Press Ok Then UNPLUG UNIT", "[COLOR red]ENJOY ALL AKA WIZARD BUILDS. THANK-YOU. [/COLOR]")
-                   
+        dialog = xbmcgui.Dialog()
+        dialog.ok("AKAWIZARD", "Now Please Press Ok Then UNPLUG UNIT", "[COLOR red]ENJOY ALL AKA WIZARD BUILDS. THANK-YOU. [/COLOR]")
+        pass            
+                  
                     
                 
 def addDir(name,url,mode,iconimage,fanart,description):
@@ -222,6 +233,7 @@ def setView(content, viewType):
         
       
 if mode==None or url==None or len(url)<1:       
+        INTROS()
         CATEGORIES()       
         
 elif mode==1:
