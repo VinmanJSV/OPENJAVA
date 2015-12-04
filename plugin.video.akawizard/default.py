@@ -13,7 +13,7 @@ base='http://167.114.14.194/Kodi/Wizard/tools/'
 ADDON=xbmcaddon.Addon(id='plugin.video.akawizard')
 INTRO = xbmc.translatePath(os.path.join('special://home/addons/plugin.video.akawizard/Animal.mp4'))  
   
-VERSION = "2.0.5"
+VERSION = "2.0.6"
 PATH = "AKA Wizard"
 
 
@@ -138,7 +138,13 @@ def wizard(name,url,description):
             ADDON.setSetting('intro','true')
             print "NOT WINDOWS"
             subprocess.call('pkill -9 kodi && kodi',shell=True)
-            
+        elif ADDON.getSetting('UNIT') == "4":
+            dp.update(0,"[COLOR red]Downloading.... [COLOR green]DONE![/COLOR]","[COLOR yellow]Extracting Zip.... [COLOR green]PLease Wait[/COLOR]","[COLOR green]KODI WILL REBOOT AUTOMATICALLY.....Please Wait![/COLOR]")
+            extract.all(lib,addonfolder,dp)
+            ADDON.setSetting('intro','true')
+            print "NOT WINDOWS"
+            cmd = "killall \-9 \Kodi && open \-a \Kodi"
+            os.system(cmd)
         else:
             dialog = xbmcgui.Dialog()
             dialog.ok("AKAWIZARD", "Now Please Press Ok Then UNPLUG UNIT", "[COLOR red]ENJOY ALL AKA WIZARD BUILDS. THANK-YOU. [/COLOR]")
