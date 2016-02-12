@@ -294,9 +294,20 @@ elif mode[0] == 'NEXT':
     pager = int(args['PAGE'][0]) + 1
     choice = args['CHOICE'][0]
     pager = str(pager)
-    url = choice.split('=')[0]+'='+pager
+    if '?genre' in choice:
+        url = choice.split('page=')[0]+'page='+pager
+        print url
+    else:
+        url = choice.split('=')[0]+'='+pager
     if re.search('tvshows',str(url),re.I):
         TVSHOWS=True    
+    elif re.search('genre',str(url),re.I):
+        try:
+            sep = url.split('genre-')[1].split('.html?')
+            url = 'http://www.streamlord.com/movies.html?genre='+sep[0]+'&'+sep[1]
+        except:
+            pass
+        MOVIES=True
     elif re.search('movies',str(url),re.I):
         MOVIES=True
     else:
