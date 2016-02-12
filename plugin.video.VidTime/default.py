@@ -278,7 +278,11 @@ elif mode[0] == 'PLAY':
     SITE = opener.open(url)
     REQ = SITE.read()
     SITE.close()
-    stream = re.compile('"file": "(.+?)"}]').findall(str(REQ))[0]
+    stream = re.compile('"file": "(.+?)"}]').findall(str(REQ))[1]
+    if 'http' in stream:
+        pass
+    elif not 'http' in stream:
+        stream = re.compile('"file": "(.+?)"}]').findall(str(REQ))[0]
     listitem =xbmcgui.ListItem (Name,'','',thumbnailImage)
     xbmcPlayer = xbmc.Player()
     xbmcPlayer.play(stream,listitem)
