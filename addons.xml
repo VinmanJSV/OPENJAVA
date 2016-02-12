@@ -73,6 +73,24 @@ provider-name="VinMan JSV">
 	</extension>
 </addon>
 
+<addon id="plugin.video.VidTime"
+       name="VidTime"
+       version="1.0.0"
+       provider-name="VinManJSV">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource"
+			library="default.py">
+			<provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Play TV and Movies </summary>
+    <description lang="en">A simple TV and Movie addon that gives a great quality stream.[CR]Register for Free.   [B]www.streamlord.com[/B]</description>
+	<platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="repository.VinManJSV" name="VinmanJSV REPO" version="1.1" provider-name="Vinman_sv">
 	<extension point="xbmc.addon.repository" name="VinmanJSV REPO">
         <info compressed="false">http://raw.github.com/VinmanJSV/OPENJAVA/master/addons.xml</info>
