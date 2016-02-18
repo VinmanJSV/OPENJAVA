@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # VinMan_JSV 2016
 
-import os,re,urllib,urllib2,xbmcplugin,xbmcgui,xbmcaddon,xbmc,urlparse,cookielib
-
+import os,re,sys,urllib,urllib2,xbmcplugin,xbmcgui,xbmcaddon,xbmc,urlparse,cookielib,base64
 thisPlugin = int(sys.argv[1])
 base_url = sys.argv[0]
 args = urlparse.parse_qs(sys.argv[2][1:])
@@ -20,13 +19,12 @@ mediaPath = path +"resources/media/"
 fanart = (path + 'fanart.jpg')
 icon = (path + 'icon.png')
 icon2 = mediaPath+'Search.png'
+SPORT = mediaPath+'sport.png'
 pager = '1'
 cj = cookielib.LWPCookieJar()
 cookiepath = (usdata+'cookies.lwp')
-
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 opener.addheaders = [('User-agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1')]
-cookiepath = (usdata+'cookies.lwp')
 login_data =urllib.urlencode({'username' : USER,
                               'password' : PASS,
                               'submit' : 'Login'
@@ -38,6 +36,9 @@ register_data =urllib.urlencode({'username' : USER,
                                 })
 TVSHOWS = None
 MOVIES= None
+
+def TEST():
+    return 
 
 def build_url(query):
     return base_url + '?' + urllib.urlencode(query)
@@ -58,11 +59,12 @@ def REG():
     ADDON.setSetting('REGISTER','false')
         
 def choose():
-    cats = ['MOVIES','MOVIE GENRES','TV SHOWS','TV SHOWS - RECENTLY UPDATED','SEARCH']
+    cats = ["MOVIES","MOVIE GENRES","TV SHOWS","TV SHOWS - RECENTLY UPDATED","SEARCH","PERCH PICKS - ASSORTED SPORTS"]
     for name in cats:
         url = build_url({'mode': name})
         li = xbmcgui.ListItem('[B]'+name+'[/B]',iconImage=icon)
         if 'SEARCH' in name:li = xbmcgui.ListItem('[B]'+name+'[/B]',iconImage=icon2)
+        if 'PERCH' in name:li = xbmcgui.ListItem('[B]'+name+'[/B]',iconImage=SPORT)
         li.setProperty('fanart_image', fanart)
         xbmcplugin.addDirectoryItem(handle=thisPlugin,url=url,
                                     listitem=li, isFolder=True)
@@ -80,9 +82,9 @@ def main(url):
         title = re.compile('<a href="(.+?)"><img src="http://www.streamlord.com/(.+?)"></a>').findall(str(page))
     else:
         page = re.compile('<li class="movie">(.+?)</li>').findall(str(REQ))
-        title = re.compile('<a href="(.+?)"><img src="(.+?)" ').findall(str(page))
+        title = re.compile('<a href="(.+?)"><img src=(.+?)width').findall(str(page))
     for t,i in title:
-        icon_site = 'http://www.streamlord.com/'+i
+        icon_site = 'http://www.streamlord.com/'+i.replace("\\'",'')
 
         if MOVIES:
             items = re.sub('watch-movie-|\.html','',t).replace('-',' ').upper().encode('utf-8')
@@ -117,7 +119,41 @@ def main(url):
     except:
         pass          
     xbmcplugin.endOfDirectory(thisPlugin)
-
+    
+def english(final):
+    try:
+        x = "MlVPdKNBjIuHvGtF1ocXdEasWZaSeFbNyRtHmJ"
+        y =":/."
+        fget = x[-1]+x[-11].lower()+x[2]
+        rget = x[-12]+x[6]+x[16] 
+        this = fget+'.+?'+rget
+        getter = re.findall(this,final)[0]
+        stage = int(final.index(getter))/5
+        work = base64.b64decode(str(final.replace(getter,''))).split('/')
+        Solve = True
+        S = 1
+        while Solve is True:        
+            if S<= stage*2:first = base64.b64decode(work[1])
+            if S<= stage:sec = base64.b64decode(work[0])
+            S = S + 1
+            if not S<= stage*2 and not S<= stage: Solve = False
+            work =[sec,first]
+        answ = work[1]+'/'+work[0]
+        if answ.startswith (x[-5].lower()+x[-10]):
+            begin = (x[-3].lower()+(x[-4]*2)+x[3].lower()+y[0:2]+y[1]+x[7].lower())
+            ender = (x[-10]+x[-5].lower())
+            killit = (x[-5].lower()+x[-10]+x[-4]+x[-12].lower()+x[-5].lower()+x[4]+x[-11].lower()+x[-3].lower())
+            mid = y[2]+x[1]+x[-6]
+            url = answ.replace(killit,begin).replace(ender,mid)
+        elif answ.startswith (x[-3].lower()+(x[-4]*2)):url = answ
+        elif answ.startswith (x[13].lower()+(x[17]*2)+x[4]):
+            killit = (x[13].lower()+(x[17]*2)+x[4])
+            begin = (x[-3].lower()+(x[-4]*2)+x[3].lower()+x[-15]+y[0:2]+y[1])
+            url = answ.replace(killit,begin)
+        return url
+    except:
+        return None
+    
 def login_page():
     try:
         req1 = opener.open('http://www.streamlord.com/login.html', login_data)
@@ -125,6 +161,10 @@ def login_page():
         req1.close()
         cj.save(filename=cookiepath, ignore_discard=False, ignore_expires=False)
     except:
+        line1 = 'SORRY SITE DOWN TRY LATER.'
+        
+        xbmcgui.Dialog().ok(addonname,line1)
+        sys.exit()
         pass
        
 def main_page():   
@@ -134,6 +174,7 @@ def main_page():
         source2 = req2.read()
         req2.close()    
     except:
+        
         pass
     logged_in_string = "Log out"
     if re.search(logged_in_string,source2,re.I):
@@ -195,6 +236,16 @@ def latest():
         xbmcplugin.addDirectoryItem(handle=thisPlugin,url=url,
                                     listitem=li, isFolder=True)
     xbmcplugin.endOfDirectory(thisPlugin)
+
+def OPEN_URL(url):
+    req = urllib2.Request(url)
+    req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
+    response = urllib2.urlopen(req)
+    onetime=response.read()
+    response.close()
+    onetime = onetime.replace('\n','').replace('\r','')
+    print onetime
+    return onetime
 
 if not USER == "" and not REGISTER == 'true':
     main_page()
@@ -318,6 +369,29 @@ elif mode[0] == 'NEXT':
         pass
     main(url)
 
-
-
+elif mode[0] =="PERCH PICKS - ASSORTED SPORTS":
+    xbmcPlayer = xbmc.Player()
+    xbmcPlayer.play('http://www.myinstants.com/media/sounds/woody-woodpecker-laugh.mp3')
+    onetime = OPEN_URL('https://www.dropbox.com/s/08u4kw16inm344p/new.xml?raw=true')
+    stuff = re.compile('<title>(.+?)</title><link>(.+?)</link><thumbnail>(.+?)</thumbnail>').findall(str(onetime))
+    for title, url, icon in stuff:
+        if ('base64') in url:url = base64.b64decode(url[8:-1])
+        elif not ('http') in url and len(url) > 2:url = english(url)
+        if ('sublink') in url:
+            links = re.findall('<sublink>(.+?)</sublink>',str(url))
+            for item in links:
+                print url
+                url = item
+                listitem =xbmcgui.ListItem (title,'','',thumbnailImage=icon)
+                listitem.setProperty('fanart_image', fanart)
+                xbmcplugin.addDirectoryItem(handle=thisPlugin, url=url,
+                                            listitem=listitem)
+        else:
+            print url
+            listitem =xbmcgui.ListItem (title,'','',thumbnailImage=icon)
+            listitem.setProperty('fanart_image', fanart)
+            xbmcplugin.addDirectoryItem(handle=thisPlugin, url=url,
+                                        listitem=listitem)
+    xbmcplugin.endOfDirectory(thisPlugin)
+       
 
