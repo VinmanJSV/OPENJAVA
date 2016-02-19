@@ -145,11 +145,15 @@ def english(final):
             killit = (x[-5].lower()+x[-10]+x[-4]+x[-12].lower()+x[-5].lower()+x[4]+x[-11].lower()+x[-3].lower())
             mid = y[2]+x[1]+x[-6]
             url = answ.replace(killit,begin).replace(ender,mid)
+        elif answ.startswith ('rtmp') or answ.startswith ('rtsp') or answ.startswith ('plugin'):url = answ
         elif answ.startswith (x[-3].lower()+(x[-4]*2)):url = answ
         elif answ.startswith (x[13].lower()+(x[17]*2)+x[4]):
             killit = (x[13].lower()+(x[17]*2)+x[4])
             begin = (x[-3].lower()+(x[-4]*2)+x[3].lower()+x[-15]+y[0:2]+y[1])
             url = answ.replace(killit,begin)
+        else:
+            pass
+        url = url.replace('///','//').replace('  ',' ').encode('utf-8')
         return url
     except:
         return None
@@ -370,24 +374,21 @@ elif mode[0] == 'NEXT':
     main(url)
 
 elif mode[0] =="PERCH PICKS - ASSORTED SPORTS":
-    xbmcPlayer = xbmc.Player()
-    xbmcPlayer.play('http://www.myinstants.com/media/sounds/woody-woodpecker-laugh.mp3')
     onetime = OPEN_URL('https://www.dropbox.com/s/08u4kw16inm344p/new.xml?raw=true')
     stuff = re.compile('<title>(.+?)</title><link>(.+?)</link><thumbnail>(.+?)</thumbnail>').findall(str(onetime))
     for title, url, icon in stuff:
         if ('base64') in url:url = base64.b64decode(url[8:-1])
-        elif not ('http') in url and len(url) > 2:url = english(url)
+        elif not ('http') in url and not ('plugin') in url and not ('rtmp') in url and not ('rstp') in url and len(url) > 2:url = english(url)
         if ('sublink') in url:
             links = re.findall('<sublink>(.+?)</sublink>',str(url))
             for item in links:
-                print url
                 url = item
                 listitem =xbmcgui.ListItem (title,'','',thumbnailImage=icon)
                 listitem.setProperty('fanart_image', fanart)
                 xbmcplugin.addDirectoryItem(handle=thisPlugin, url=url,
                                             listitem=listitem)
         else:
-            print url
+            pass
             listitem =xbmcgui.ListItem (title,'','',thumbnailImage=icon)
             listitem.setProperty('fanart_image', fanart)
             xbmcplugin.addDirectoryItem(handle=thisPlugin, url=url,
