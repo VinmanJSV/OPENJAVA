@@ -20,6 +20,7 @@ fanart = (path + 'fanart.jpg')
 icon = (path + 'icon.png')
 icon2 = mediaPath+'Search.png'
 SPORT = mediaPath+'sport.png'
+ROCK = mediaPath+'Rock.png'
 pager = '1'
 cj = cookielib.LWPCookieJar()
 cookiepath = (usdata+'cookies.lwp')
@@ -65,6 +66,7 @@ def choose():
         li = xbmcgui.ListItem('[B]'+name+'[/B]',iconImage=icon)
         if 'SEARCH' in name:li = xbmcgui.ListItem('[B]'+name+'[/B]',iconImage=icon2)
         if 'PERCH' in name:li = xbmcgui.ListItem('[B]'+name+'[/B]',iconImage=SPORT)
+        if 'ROCK' in name:li = xbmcgui.ListItem('[B]'+name+'[/B]',iconImage=ROCK)
         li.setProperty('fanart_image', fanart)
         xbmcplugin.addDirectoryItem(handle=thisPlugin,url=url,
                                     listitem=li, isFolder=True)
@@ -248,7 +250,6 @@ def OPEN_URL(url):
     onetime=response.read()
     response.close()
     onetime = onetime.replace('\n','').replace('\r','')
-    print onetime
     return onetime
 
 if not USER == "" and not REGISTER == 'true':
@@ -348,6 +349,7 @@ elif mode[0] == 'TVSHOWS':
     TVSHOWS = False
     MOVIES = False
     main(url)
+
     
 elif mode[0] == 'NEXT':
     pager = int(args['PAGE'][0]) + 1
@@ -374,11 +376,17 @@ elif mode[0] == 'NEXT':
     main(url)
 
 elif mode[0] =="PERCH PICKS - ASSORTED SPORTS":
-    onetime = OPEN_URL('https://www.dropbox.com/s/08u4kw16inm344p/new.xml?raw=true')
+    
+    try:
+        onetime = OPEN_URL('https://www.dropbox.com/s/08u4kw16inm344p/new.xml?raw=true')
+    except:
+        pass
     stuff = re.compile('<title>(.+?)</title><link>(.+?)</link><thumbnail>(.+?)</thumbnail>').findall(str(onetime))
     for title, url, icon in stuff:
         if ('base64') in url:url = base64.b64decode(url[8:-1])
         elif not ('http') in url and not ('plugin') in url and not ('rtmp') in url and not ('rstp') in url and len(url) > 2:url = english(url)
+        if 'youtube' in url and not 'plugin' in url:
+            url = build_url({'mode': 'YouTube', 'url':url})           
         if ('sublink') in url:
             links = re.findall('<sublink>(.+?)</sublink>',str(url))
             for item in links:
@@ -394,5 +402,11 @@ elif mode[0] =="PERCH PICKS - ASSORTED SPORTS":
             xbmcplugin.addDirectoryItem(handle=thisPlugin, url=url,
                                         listitem=listitem)
     xbmcplugin.endOfDirectory(thisPlugin)
-       
-
+    
+elif mode[0] =="YouTube":
+    url = args['url'][0]
+    try:
+        xbmc.executebuiltin('PlayMedia(plugin://plugin.video.youtube/play/?video_id='+ url.split('v=')[1]+')')
+    except:
+        pass
+    
