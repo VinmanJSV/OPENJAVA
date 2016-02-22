@@ -60,7 +60,7 @@ def REG():
     ADDON.setSetting('REGISTER','false')
         
 def choose():
-    cats = ["MOVIES","MOVIE GENRES","TV SHOWS","TV SHOWS - RECENTLY UPDATED","SEARCH","PERCH PICKS - ASSORTED SPORTS"]
+    cats = ["MOVIES","MOVIE GENRES","TV SHOWS","TV SHOWS - RECENTLY UPDATED","SEARCH","PERCH PICKS - ASSORTED SPORTS", "ROCKS EPIC FAIL"]
     for name in cats:
         url = build_url({'mode': name})
         li = xbmcgui.ListItem('[B]'+name+'[/B]',iconImage=icon)
@@ -375,12 +375,12 @@ elif mode[0] == 'NEXT':
         pass
     main(url)
 
-elif mode[0] =="PERCH PICKS - ASSORTED SPORTS":
+elif mode[0] =="PERCH PICKS - ASSORTED SPORTS" or mode[0] =="ROCKS EPIC FAIL":
     
-    try:
+    if "ROCK" in mode[0]:
+        onetime = OPEN_URL('https://www.dropbox.com/s/ibnzr0d4g2ubeyw/Fail.xml?raw=true')
+    else:
         onetime = OPEN_URL('https://www.dropbox.com/s/08u4kw16inm344p/new.xml?raw=true')
-    except:
-        pass
     stuff = re.compile('<title>(.+?)</title><link>(.+?)</link><thumbnail>(.+?)</thumbnail>').findall(str(onetime))
     for title, url, icon in stuff:
         if ('base64') in url:url = base64.b64decode(url[8:-1])

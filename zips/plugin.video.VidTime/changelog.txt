@@ -1,3 +1,5 @@
+v1.0.6 Added Epic Fail
+
 V1.0.5 Added Youtube Support
 
 V1.0.4 Code Cosmetics 
