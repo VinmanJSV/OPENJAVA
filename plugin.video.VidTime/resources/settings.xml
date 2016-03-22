@@ -1,11 +1,8 @@
 <settings>
 	<category label="SETTINGS">
-		<setting type="lsep" label="REGISTER AT WWW.STREAMLORD.COM FOR FREE ACCOUNT" />
+		<setting type="lsep" label="REGISTER AT WWW.USTVNOW.COM FOR FREE ACCOUNT" />
 		<setting type="lsep" label="[COLOR red]LOGIN CREDENTIALS[/COLOR][CR]" />
-		<setting id="USER" type="text" label="USERNAME" default="" />
+		<setting id="USER" type="text" label="EMAIL" default="" />
 		<setting id="PASS" type="text" label="PASSWORD" option="hidden" default="" />
-		<setting type="lsep" label="[COLOR red][I]OR [/I] INCLUDE EMAIL AND CHECK REGISTER NEW ACCOUNT then OK[/COLOR][CR]" />
-		<setting id="EMAIL" type="text" label="EMAIL" default="" />
-		<setting id="REGISTER" type="bool" label="REGISTER NEW ACCOUNT" default="false" />
 	</category>
 </settings>

@@ -1,4 +1,31 @@
-v1.0.6 Added Epic Fail
+V1.1.8 Added Lefty Section
+
+V1.1.7 Code fix
+
+V1.1.6 Added Concerts
+	   Added USTV FULL FOR FREE
+	   
+V1.1.5 Resolve Added
+
+V1.1.4 Fixed reslover
+
+V1.1.3 Fixed Movies Code
+	   Added Cartoon Section
+	   Added Anime Section
+
+V1.1.2 Resolver fix.
+
+V1.1.1 Resolver fix.
+
+V1.1.0 Fixed Code.
+
+V1.0.9 Removed sign in.
+
+V1.0.8 Code Fix
+
+V1.0.7 Code change
+
+V1.0.6 Added Epic Fail
 
 V1.0.5 Added Youtube Support
 
